@@ -10,7 +10,7 @@
 
         </div> <!-- /.card-body -->
         <div class="card-body" style="overflow-y:scroll;">
-            <form action="{{ route('sale.store') }}" method="post">
+            <form id='form' action="{{ route('sale.store') }}" method="post">
 
                 {{ csrf_field() }}
                 {{ method_field('post') }}
@@ -263,6 +263,7 @@
         });
         // add new client in sale page
         $('body').on('submit', '#new_client', function(e) {
+
             e.preventDefault();
             var formData = new FormData($(this)[0]);
             $.ajax({
@@ -415,13 +416,21 @@
 </script>
 <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
 <script>
+    document.onkeyup = function (event)  {
+ 
+        if (event.which == 13 || event.keyCode == 13)  {
+        
+            document.getElementById('form').submit(); // your form has an id="form"
+        }
+        return true;
+    }
     var i = 0;
     $("#addRemoveIp").click(function() {
-            ++i;
-        $("#multiForm").append('<input type="text" name="multiInput[' + i + '][extra]" class="form-control col-sm-5 offset-sm-4" /><button type="button" class="remove-item btn btn-danger">Delete</button>');
+        ++i;
+        $("#multiForm").append('<div class="d-flex offset-md-1" id="tr"><input type="text" name="multiInput[' + i + '][extra]" class="form-control col-sm-5 offset-sm-4" /><button type="button" class="remove-item btn btn-danger">Delete</button></div>');
     });
     $(document).on('click', '.remove-item', function() {
-        $(this).parents('tr').remove();
+        $(this).parents('#tr').remove();
     });
 </script>
 
