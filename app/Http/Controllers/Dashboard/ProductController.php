@@ -112,6 +112,10 @@ class ProductController extends Controller
     {
         if ($request->ajax()) {
             $products = Product::when($request->searchbyproduct, function ($q) use ($request) {
+                if(is_numeric($request->searchbyproduct)){
+                    return $q->where('codebar', '
+                    =',  $request->searchbyproduct );
+                }else
                 return $q->where('product_name', 'like', '%' . $request->searchbyproduct . '%');
             })->when($request->searchbycategoty, function ($q) use ($request) {
                 return $q->where('category_id', $request->searchbycategoty);
@@ -163,8 +167,9 @@ class ProductController extends Controller
         $out = "";
         $barcode = $request->code;
         $products = Product::where('codebar', '=', $barcode)->get();
+
         return Response::json(array(
-            'product' => $product,
+            'product' => $products,
         ));
     }
 

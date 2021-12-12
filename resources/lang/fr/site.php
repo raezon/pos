@@ -160,5 +160,6 @@ return [
     'create' => "Créer",
     'update' => "Mise à jour",
     'print' => "Imprimer",
+    'extra' =>'extra'
 
 ];

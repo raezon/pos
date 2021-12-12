@@ -73,16 +73,23 @@ class SaleController extends Controller
             'quantity' => 'required',
         ]);
         $data = $request->all();
+        $extra=$data['multiInput'];
+        $sold=0;
+        foreach ($extra as $element) {
+            $sold+=$element['extra'];
+        }
 
         $sale = Sale::create([
             'number_sale' => $data['number_sale'],
-            'total' => $data['total'],
+            'total' => $data['total']+$sold,
             'discount' => $data['discount'],
             'total_amount' => $data['total_amount'],
             'paid' => $data['paid'],
             'due' => $data['credit'],
             'status' => $data['status'],
             'client_id' => $data['client_id'],
+            'extra' => $sold,
+            
 
         ]);
         $dat = $data['product'];
@@ -173,7 +180,7 @@ class SaleController extends Controller
         $sale->delete();
 
         $data = $request->all();
-
+        
         $sale_update = Sale::create([
             'number_sale' => $data['number_sale'],
             'total' => $data['total'],

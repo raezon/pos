@@ -1,7 +1,9 @@
 $(document).ready(function () {
 
+
     // Add product to sale 
     $('.add-product-btn').on('click', function (e) {
+        
         e.preventDefault();
         var stock = $(this).data('stock');
         if (stock == 0) {
@@ -62,6 +64,7 @@ $(document).ready(function () {
     });
     // Add product to purchase
     $('body').on('click', '.add-product-purchase', function (e) {
+      
         e.preventDefault();
         var name = $(this).data('name');
         var id = $(this).data('id');

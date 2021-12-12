@@ -159,6 +159,7 @@ return [
     'create' => "Create",
     'update' => "Update",
     'print' => "Print",
+    'extra' =>'extra'
 
 
 
