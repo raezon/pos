@@ -101,7 +101,7 @@
                             <div>
                                 <div class="form-group row" id='multiForm'>
                                     <label class="col-sm-4 col-form-label">@lang('site.extra') : </label>
-                                    <input type="text" name="multiInput[0][extra]" class="form-control col-sm-5" />
+                                    <input type="text" id='extraInput-1' name="multiInput[0][extra]" class="form-control col-sm-5 extraInput" />
                                     <input type="button" name="add" value="Add" id="addRemoveIp" class="btn btn-outline-dark">
 
                                 </div>
@@ -304,6 +304,7 @@
         // Search for product to sale by Category Product and by product name
 
         $("#searchbycategoty").add("#searchbyproduct").on('change input', function() {
+
             var searchbycategoty = $('#searchbycategoty').val();
             var searchbyproduct = $("#searchbyproduct").val();
             $.ajax({
@@ -416,18 +417,37 @@
 </script>
 <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
 <script>
-    document.onkeyup = function (event)  {
- 
-        if (event.which == 13 || event.keyCode == 13)  {
-        
+    var extra2 = 0;
+    document.onkeyup = function(event) {
+
+        if (event.which == 13 || event.keyCode == 13) {
+
             document.getElementById('form').submit(); // your form has an id="form"
         }
         return true;
     }
     var i = 0;
+    var oldInput2=0;
     $("#addRemoveIp").click(function() {
         ++i;
-        $("#multiForm").append('<div class="d-flex offset-md-1" id="tr"><input type="text" name="multiInput[' + i + '][extra]" class="form-control col-sm-5 offset-sm-4" /><button type="button" class="remove-item btn btn-danger">Delete</button></div>');
+        $("#multiForm").append('<label class="col-sm-4 col-form-label">@lang("site.extra") : </label><input id="extraInput' + i + '"  type="text" name="multiInput[' + i + '][extra]" class="form-control col-sm-5 extraInput " /><button type="button" class="remove-item btn btn-outline-dark btn btn-danger">X</button>');
+
+        $('.extraInput').each(function() {
+            $(this).change(function() {
+
+                if ($(this).attr('id') != 'extraInput-1') {
+
+                    price=Number.parseFloat($('.total-price').val());
+                    extra2 = Number.parseFloat($(this).val()) + Number.parseFloat(extra2);
+                   // counterInput1=1
+                    price1 =  Number.parseFloat(price) + Number.parseFloat(extra2)+Number.parseFloat(extra)-(Number.parseFloat(oldInput1)+Number.parseFloat(oldInput2));
+                    oldInput2=Number.parseFloat(extra2);
+                    $('.total-price').val(price1);
+                 
+                }
+
+            });
+        });
     });
     $(document).on('click', '.remove-item', function() {
         $(this).parents('#tr').remove();

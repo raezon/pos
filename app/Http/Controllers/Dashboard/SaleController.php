@@ -75,17 +75,22 @@ class SaleController extends Controller
         $data = $request->all();
         $extra=$data['multiInput'];
         $sold=0;
+      /*  print_r($extra);
+        echo $data['total']+$sold;
+        die();*/
         foreach ($extra as $element) {
-            $sold+=$element['extra'];
+            $sold=$element['extra']+$sold;
+            
         }
-
+        $total=$data['total_amount'];
+        $credit=$total-$data['paid'];
         $sale = Sale::create([
             'number_sale' => $data['number_sale'],
-            'total' => $data['total']+$sold,
+            'total' => $total,
             'discount' => $data['discount'],
-            'total_amount' => $data['total_amount'],
+            'total_amount' =>$total,
             'paid' => $data['paid'],
-            'due' => $data['credit'],
+            'due' =>  $credit,
             'status' => $data['status'],
             'client_id' => $data['client_id'],
             'extra' => $sold,

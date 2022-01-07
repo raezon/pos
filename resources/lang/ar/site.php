@@ -87,6 +87,7 @@ return [
     'updatespending' => "تحديث المصروف",
     'close' => "اغلاق",
     'save' => "حفظ",
+    'remove'=>'X',
 
     //moderator view translate to arabic
     'createmoderator' => "إنشاء مشرف جديد",

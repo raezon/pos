@@ -1,6 +1,8 @@
 $(document).ready(function () {
-
-
+   
+     extra=0;
+    var counterInput1=0;
+     oldInput1=0;
     // Add product to sale 
     $('.add-product-btn').on('click', function (e) {
         
@@ -33,7 +35,7 @@ $(document).ready(function () {
                     var add = parseInt(next) + 1;
                     if (add <= stock) {
                         $("tr:nth-child(" + i + ") td:nth-child(3) input").val(add);
-                        var all = add * price;
+                        var all = (add * price);
 
                     }
                     $("tr:nth-child(" + i + ") td:nth-child(4)").html(all);
@@ -113,6 +115,40 @@ $(document).ready(function () {
         e.preventDefault();
 
     }); //end of disabled
+  /*  $('input.extraInput').each(function () {
+        alert()
+        $(this).change(function () {
+            e.preventDefault();
+            alert()
+           // var elem = event.target;
+         //   alert(elem.value)
+        });
+    });*/
+
+    $('.extraInput').each(function () {
+        $(this).change(function () {
+            var counterInput1=0;
+
+          
+            if(oldInput1!=$(this).val()){
+              
+                  
+                    price=Number.parseFloat($('.total-price').val());
+                    extra=Number.parseFloat($(this).val());
+                    counterInput1=1
+                  
+
+                    price1 = Number.parseFloat(price) + Number.parseFloat(extra2) + Number.parseFloat(extra) -(Number.parseFloat(oldInput1)+Number.parseFloat(oldInput2));
+                    oldInput1=Number.parseFloat(extra);
+                    $('.total-price').val(price1);
+              
+            }
+           
+          
+        
+        });
+    });
+   
 
     $('body').on('click', '.remove-product-btn', function (e) {
 
@@ -185,11 +221,13 @@ function calculateTotal() {
     }); //end of product price
 
     //$('.total-price').html(price);
+    price=Number.parseFloat(price)+Number.parseFloat(extra2)+Number.parseFloat(extra);
     $('.total-price').val(price);
+    
 
 } //end of calculate total
 function calculateTotalAmount() {
-
+   
     var total = $('.total-price').val();
     var discount = $('#discount').val();
     var total_amount = total - discount;

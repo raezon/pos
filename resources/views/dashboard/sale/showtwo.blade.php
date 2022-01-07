@@ -263,6 +263,10 @@
                             <p style="margin-bottom:0;">
                                 <strong>{{ number_format($sale->total_amount - $sale->paid,2) }}</strong></p>
                         </div>
+                        <div style=" border: 2px solid #000000;border-radius: 10px;margin: 5px 0;">
+                            <p style="margin-bottom:0;">
+                                <strong>{{ number_format($sale->extra,2) }}</strong></p>
+                        </div>
                     </div>
                     <div class="float-right text-center" style="width:12%">
                         <div style=" border: 2px solid #000000;border-radius: 10px;margin: 5px 0;">
@@ -280,6 +284,9 @@
                         <div style=" border: 2px solid #000000;border-radius: 10px;margin: 5px 0;">
                             <p style="margin-bottom:0;"><strong>Rest a payer </strong></p>
                         </div>
+                        <div style=" border: 2px solid #000000;border-radius: 10px;margin: 5px 0;">
+                            <p style="margin-bottom:0;"><strong>Extra </strong></p>
+                        </div>
                     </div>
 
                 </div>
@@ -288,9 +295,7 @@
         </div>
     </div>
     <div class="too-footer offset-xl-2 col-xl-8 col-lg-12 col-md-12 col-sm-12 col-12 padding">
-        <div class="too-border text-center">
-            <p class="mb-0">{{ $activity }} {{ $store_name }} {{ $sale->created_at }} Designed by TouwfiQ Meghlaoui</p>
-        </div>
+
     </div>
     {{--  <script type="text/javascript">
         window.addEventListener("load", window.print());

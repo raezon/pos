@@ -159,7 +159,8 @@ return [
     'create' => "Create",
     'update' => "Update",
     'print' => "Print",
-    'extra' =>'extra'
+    'extra' =>'extra',
+    'remove'=>'X',
 
 
 
